@@ -8,6 +8,7 @@ Here you can find a written guide to running Linux virtual machine on macOS.
 
 [Before You Begin](#before-you-begin) •
 [Getting Started](#getting-started) •
+[Troubleshooting](#troubleshooting) •
 [References](#references)
 
 </div>
@@ -262,6 +263,22 @@ My intention here is to use the [remote development](https://code.visualstudio.c
      ```
 
 1. Now you can access the virtual machine using this hostname.
+
+## Troubleshooting
+
+1. Occasionally, you might run into a situation where `/dev/vda` is re-mounted as read-only due to filesystem errors.
+
+1. In this case, use `fsck` to fix the filesystem errors.
+
+   - ```bash
+     sudo fsck -y /dev/vda
+     ```
+
+1. Shut down the virtual machine properly and restart it.
+
+   - ```bash
+     sudo shutdown now
+     ```
 
 ## References
 
