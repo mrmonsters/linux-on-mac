@@ -31,7 +31,8 @@ Please find the original README from the upstream [here](./docs/VFTOOL.md). I am
 
    - ```bash
      # image
-     jammy-server-cloudimg-amd64.img
+     jammy-server-cloudimg-arm64.tar.gz
+     tar xvfz jammy-server-cloudimg-arm64.tar.gz
      # initrd
      ubuntu-22.04-server-cloudimg-arm64-initrd-generic
      # kernel
@@ -53,7 +54,7 @@ Please find the original README from the upstream [here](./docs/VFTOOL.md). I am
      ./vftool \
 	   -k /path/to/kernel \
 	   -i /path/to/initrd \
-	   -d /path/to/image \
+	   -d /path/to/image.img \
 	   -m 8192 \
 	   -a "console=hvc0" 
      ```
@@ -81,7 +82,7 @@ Please find the original README from the upstream [here](./docs/VFTOOL.md). I am
      chroot /mnt
      ```
 
-1. Disable clout init.
+1. Disable cloud init.
 
    - ```bash
      touch /etc/cloud/cloud-init.disabled
@@ -129,7 +130,7 @@ Please find the original README from the upstream [here](./docs/VFTOOL.md). I am
      ./vftool \
 	   -k /path/to/kernel \
 	   -i /path/to/initrd \
-	   -d /path/to/image \
+	   -d /path/to/image.img \
 	   -p 4 \
 	   -m 8192 \
 	   -a "root=/dev/vda rw console=hvc0" 
@@ -244,6 +245,13 @@ My intention here is to use the [remote development](https://code.visualstudio.c
 
    - ```bash
      sudo systemctl status docker
+     ```
+
+1. Add the current user to the `docker` group, so that Docker can be managed by a non-root user.
+
+   - ```bash
+     sudo usermod -aG docker $USER
+     newgrp docker
      ```
 
 1. Assert that images can be downloaded from the Docker hub.
